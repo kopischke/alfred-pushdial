@@ -1,16 +1,16 @@
 # Dial with PushDialer workflow for Alfred 2
 
-An [Alfred 2 workflow][alfred] making it easy to dial phone numbers from Contacts, text selected in any OS X application, or the Alfred prompt with [PushDialer][pushdialer]. Note you need the [Alfred Powerpack][alfred-powerpack] to enable workflows.
+An [Alfred 2 workflow][alfred] making it easy to dial phone numbers from OS X contacts, text selected in any OS X application, or the Alfred prompt with [PushDialer][pushdialer]. Note you need the [Alfred Powerpack][alfred-powerpack] to enable workflows.
 
 ![Dial with PushDialer workflow overview](doc/pushdialer-workflow.png)
 
 ## Usage
 
-### Using it with Contacts
+### Using it with OS X contacts
 
-The workflow offers two different ways to dial addresses retrieved from OS X’ Contacts store with Alfred:
+The workflow offers two different ways to dial addresses retrieved from OS X’ contacts store with Alfred:
 
-1. it defines a custom Contacts action which will dial a number when actioned from Alfred’s contacts viewer. For this to work, assign the “Dial” action to phone numbers in Alfred’s Contacts settings (found in *Preferences » Features » Contacts » Contacts*):
+1. it defines a custom contacts action which will dial a number when actioned from Alfred’s contacts viewer. For this to work, assign the “Dial” action to phone numbers in Alfred’s Contacts settings (found in *Preferences » Features » Contacts » Contacts*):
 
     ![Alfred Contacts custom action settings](doc/pushdialer-contacts-settings.png)
     
@@ -20,7 +20,7 @@ The workflow offers two different ways to dial addresses retrieved from OS X’ 
     
     `call` returns the first found of the home, work and mobile phone numbers for contacts whose name or company name matches the query. If you want to specifically target home, work or mobile numbers, `call`’s brethren `callh`, `callw` and `callm` will do your bidding.
     
-    Note the search is case sensitive if your query starts with an upper case letter, case agnostic if not (i.e. “Cool” finds “Liquid Coolants Ltd.”, but “Mancoolie”, while “cool” finds both).
+    Note the search is case sensitive if your query starts with an upper case letter, case agnostic if not (i.e. “Cool” finds “Liquid Coolants Ltd.”, but not “Mancoolie”, while “cool” finds both).
 
 ### Using it with text selected in OS X applications
 
