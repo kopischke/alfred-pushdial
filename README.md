@@ -34,7 +34,7 @@ The workflow defines a `dial` keyword: any query that follows it is passed to th
 
 ## Updating
 
-Dial with PushDialer supports [Alleyoop][alleyoop] for automated updates. Install Alleyoop and do `oop`.
+Dial with PushDialer supports [Alleyoop][alleyoop] for automated updates. [Install Alleyoop][alleyoop-download] and do `oop`.
 
 ## Known bugs
 
@@ -43,7 +43,7 @@ Dial with PushDialer supports [Alleyoop][alleyoop] for automated updates. Instal
 
 ## Credits and License
 
-Inspired by the PushDialer workflow by Florian Pellet.
+Inspired by the PushDialer workflow by [Florian Pellet][pellet-workflows].
 
 The `call` keyword family relies on the [*contacts* utility by Shane Celis][contacts-util] to provide its results. Contacts is licensed under the GPL version 2. As it is distributed with the workflow, this means the Dial with PushDialer workflow is also distributed under the terms of the [General Public License version 2][gpl2].
 
@@ -56,7 +56,9 @@ The `call` keyword family relies on the [*contacts* utility by Shane Celis][cont
 
 [alfred]:           http://www.alfredapp.com
 [alfred-powerpack]: http://www.alfredapp.com/powerpack/
-[pushdialer]:       http://pushdialer.com
-[alleyoop]:         http://alfred.daniel.sh/Workflows/Alleyoop.alfredworkflow
+[alleyoop]:         http://alfred.daniel.sh
+[alleyoop-download]:http://alfred.daniel.sh/Workflows/Alleyoop.alfredworkflow
 [contacts-util]:    http://www.gnufoo.org/contacts/contacts.html
 [gpl2]:             http://www.gnu.org/licenses/gpl-2.0.html
+[pellet-workflows]: http://florianpellet.com/alfred/
+[pushdialer]:       http://pushdialer.com
