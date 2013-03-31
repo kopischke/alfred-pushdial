@@ -1,6 +1,6 @@
 # Dial with PushDialer workflow for Alfred 2
 
-An [Alfred 2 workflow][alfred] making it easy to dial phone number from Contacts, text selected in any OS X application, or the Alfred prompt with [PushDialer][pushdialer]. Note you need the [Alfred Powerpack][alfred-powerpack] to enable workflows.
+An [Alfred 2 workflow][alfred] making it easy to dial phone numbers from Contacts, text selected in any OS X application, or the Alfred prompt with [PushDialer][pushdialer]. Note you need the [Alfred Powerpack][alfred-powerpack] to enable workflows.
 
 ![Dial with PushDialer workflow overview](doc/pushdialer-workflow.png)
 
@@ -10,7 +10,7 @@ An [Alfred 2 workflow][alfred] making it easy to dial phone number from Contacts
 
 The workflow offers two different ways to dial addresses retrieved from OS X’ Contacts store with Alfred:
 
-1. it defines a custom Contacts action which will dial a number when actioned from Alfred’s contacts viewer. For this to work, assign the “Dial” action to phone numbers in Alfred’s Contacts settings (*Preferences » Features » Contacts » Contacts*):
+1. it defines a custom Contacts action which will dial a number when actioned from Alfred’s contacts viewer. For this to work, assign the “Dial” action to phone numbers in Alfred’s Contacts settings (found in *Preferences » Features » Contacts » Contacts*):
 
     ![Alfred Contacts custom action settings](doc/pushdialer-contacts-settings.png)
     
@@ -38,7 +38,7 @@ Dial with PushDialer supports [Alleyoop][alleyoop] for automated updates. Instal
 
 ## Known bugs
 
-* If you miss mobile numbers in feedback, make sure the phone label in the Contacts application is not set to “iPhone” – that label is not recognized by the contacts utility.
+* If you miss mobile numbers in feedback, make sure the phone label in the Contacts application is not set to “iPhone” – that label is not recognized by the utility used to query the Contacts store.
 * Alfred version 2.0.2 seems not to pass query parameters containing non-ASCII characters correctly to script filters. The `call` filters will not match such queries until this is resolved. 
 
 ## Credits and License
