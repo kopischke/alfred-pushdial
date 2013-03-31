@@ -1,0 +1,69 @@
+#!/usr/bin/env bash
+query=($1)
+desc="${2:-main phone number}"
+code="${3:-%p}"
+icon="${4:-vCard.png}"
+
+# Searches beginning with a lower case letter are case insensitive
+ucase='[[:upper:]]'
+[[ ${query[0]:0:1} =~ $ucase ]] && shopt -u nocasematch || shopt -s nocasematch
+
+# PLIST head
+echo '<?xml version="1.0" encoding="UTF-8"?>'
+echo '<items>'
+
+blank='^[[:space:]]*$'
+if [[ ! "${query[0]}" =~ $blank ]]; then
+	names=(); numbers=(); uids=()
+	while read -r || [[ -n "$REPLY" ]]; do
+		# split names and numbers on UID (as a makeshift record separator)
+		# filtering out non-matching names (as contacts itself only accepts a single,
+		# unquoted word as its query) and results without a phone number.
+		uid_regex='[A-Z0-9]{8}(-[A-Z0-9]{4}){3}-[A-Z0-9]{12}:ABPerson'
+		has_phone="(.*) ($uid_regex) (.*) $uid_regex (.+)"
+		has_query=".*${query[*]}.*"
+		if [[ $REPLY =~ $has_phone ]]; then
+			[[ ${BASH_REMATCH[1]} != ' ' ]] && name="${BASH_REMATCH[1]}" || unset name
+			uid="${BASH_REMATCH[2]}"
+			company="${BASH_REMATCH[4]}"
+			number="${BASH_REMATCH[6]}"
+			# if we match on name, add company name (if any), and vice versa
+			if   [[ $name =~ $has_query ]]; then names+=("$name${company:+ ($company)}")
+			elif [[ $company =~ $has_query ]]; then names+=("$company${name:+ – $name}")
+			else continue # skip when no full match is found
+			fi
+			numbers+=("$number")
+			uids+=("$uid")
+		fi
+	done < <(./contacts -SHs -f "%fn %ln %u %c %u $code" ${query[0]})
+	
+	# create PLIST items from matching contact items
+	# (check for error message as sends these to stdout)
+	if (( ${#names[@]} > 0 )) && [[ ${names[0]} != 'error: no one found' ]]; then
+		for (( i=0; i < ${#names[@]}; i++ )); do
+			name="${names[$i]}"
+			number="${numbers[$i]}"
+			uid="${uids[$i]}"
+			# deduplicate items
+			(( i > 0 )) && [[ $name == "${names[$(($i-1))]}" && $number == "${numbers[$(($i-1))]}" ]] && continue
+			# PLIST item entry
+			echo '<item uid="'"$uid"'" arg="'"$number"'" valid="yes">'
+			echo '<title><![CDATA['"$name"']]></title>'
+			echo '<subtitle><![CDATA[Dial '"$desc: $number"']]></subtitle>'
+			echo '<icon>'"$icon"'</icon>'
+			echo '</item>'
+		done
+	else
+		# Nothing found PLIST item
+		title='No matching contacts found'
+		subtitle="Action this item to run Alfred default searches for “${query[*]}”."
+		echo '<item uid="noresults" arg="alfredsearch:'"${query[*]}"'" valid="yes">'
+		echo '<title><![CDATA['"$title"']]></title>'
+		echo '<subtitle><![CDATA['"$subtitle"']]></subtitle>'
+		echo '<icon type="fileicon">/Applications/Contacts.app</icon>'
+		echo '</item>'
+	fi
+fi
+
+# PLIST tail
+echo '</items>'

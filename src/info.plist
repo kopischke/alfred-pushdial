@@ -1,0 +1,525 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>net.kopischke.alfred.pushdial</string>
+	<key>connections</key>
+	<dict>
+		<key>0621FD11-8670-408A-9D33-9F90B30B9980</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>4788BA74-E0DB-4E57-BBB7-8F0FE1A26D30</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>6DE8F299-FB56-4632-BC64-ADA04CBCDB42</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+		<key>11DE4C89-1F64-4C74-B085-29C722E79422</key>
+		<array/>
+		<key>4788BA74-E0DB-4E57-BBB7-8F0FE1A26D30</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>56870C16-E0EB-4494-A4E3-3C3B75A00DB7</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>710FA760-144A-4CAB-BCFB-58068098460D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+		<key>47D96C10-AEEC-42E2-9477-4480A281E421</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>4788BA74-E0DB-4E57-BBB7-8F0FE1A26D30</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>6DE8F299-FB56-4632-BC64-ADA04CBCDB42</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+		<key>4A1BDC7F-9D6E-40B0-83D0-C5AC20D045EF</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>4788BA74-E0DB-4E57-BBB7-8F0FE1A26D30</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>6DE8F299-FB56-4632-BC64-ADA04CBCDB42</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+		<key>6DE8F299-FB56-4632-BC64-ADA04CBCDB42</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>ED8BE616-3542-447B-BB4E-AE61C9F13719</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+		<key>7D86F3F2-651C-44AA-9BA6-2CF58CE12981</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>4788BA74-E0DB-4E57-BBB7-8F0FE1A26D30</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+		<key>7DC2A0EE-C4E2-4A9C-B146-E67299FFE866</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>4788BA74-E0DB-4E57-BBB7-8F0FE1A26D30</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>6DE8F299-FB56-4632-BC64-ADA04CBCDB42</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+		<key>8C4148D5-F99B-460A-956C-827943864CFA</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>4788BA74-E0DB-4E57-BBB7-8F0FE1A26D30</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+		<key>F6D41691-C9EC-45BB-A915-FCE5BD092E26</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>4788BA74-E0DB-4E57-BBB7-8F0FE1A26D30</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Martin Kopischke</string>
+	<key>description</key>
+	<string>Dial phone number on iPhone via PushDialer.</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Dial with PushDialer</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>escaping</key>
+				<integer>4</integer>
+				<key>script</key>
+				<string>def is_alfred_search?
+	"{query}" =~ /^alfredsearch:/
+end
+
+print "{query}" if is_alfred_search?</string>
+				<key>type</key>
+				<integer>2</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>6DE8F299-FB56-4632-BC64-ADA04CBCDB42</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>output</key>
+				<integer>0</integer>
+				<key>removeextension</key>
+				<false/>
+				<key>sticky</key>
+				<false/>
+				<key>text</key>
+				<string>Number {query} sent to PushDialer.</string>
+				<key>title</key>
+				<string>Dialing…</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>56870C16-E0EB-4494-A4E3-3C3B75A00DB7</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string>[[ -n "{query}" ]] &amp;&amp; open pushdialer://"{query}" || afplay /System/Library/Sounds/Basso.aiff</string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.script</string>
+			<key>uid</key>
+			<string>710FA760-144A-4CAB-BCFB-58068098460D</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>name</key>
+				<string>Dial</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.contact</string>
+			<key>uid</key>
+			<string>8C4148D5-F99B-460A-956C-827943864CFA</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>4</integer>
+				<key>keyword</key>
+				<string>callw</string>
+				<key>runningsubtext</key>
+				<string>Searching work phone numbers for “{query}”…</string>
+				<key>script</key>
+				<string>./numbers '{query}' 'work phone number' '%wp'</string>
+				<key>subtext</key>
+				<string>Find work phone number for “{query}”.</string>
+				<key>title</key>
+				<string>Call a contact’s work phone</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>7DC2A0EE-C4E2-4A9C-B146-E67299FFE866</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>4</integer>
+				<key>keyword</key>
+				<string>callh</string>
+				<key>runningsubtext</key>
+				<string>Searching home numbers for “{query}”…</string>
+				<key>script</key>
+				<string>./numbers '{query}' 'home phone number' '%hp'</string>
+				<key>subtext</key>
+				<string>Find main home number for “{query}”.</string>
+				<key>title</key>
+				<string>Call a contact’s home number</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>0621FD11-8670-408A-9D33-9F90B30B9980</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>1</integer>
+				<key>hotkey</key>
+				<integer>34</integer>
+				<key>hotmod</key>
+				<integer>393216</integer>
+				<key>hotstring</key>
+				<string>I</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>7D86F3F2-651C-44AA-9BA6-2CF58CE12981</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>1</integer>
+				<key>argument</key>
+				<integer>1</integer>
+				<key>argumenttext</key>
+				<string>dial </string>
+				<key>hotkey</key>
+				<integer>34</integer>
+				<key>hotmod</key>
+				<integer>917504</integer>
+				<key>hotstring</key>
+				<string>I</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>11DE4C89-1F64-4C74-B085-29C722E79422</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>4</integer>
+				<key>keyword</key>
+				<string>callm</string>
+				<key>runningsubtext</key>
+				<string>Searching mobile phone numbers for “{query}”…</string>
+				<key>script</key>
+				<string>./numbers '{query}' 'mobile phone number' '%mp'</string>
+				<key>subtext</key>
+				<string>Find mobile phone number for “{query}”.</string>
+				<key>title</key>
+				<string>Call a contact’s mobile phone</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>4A1BDC7F-9D6E-40B0-83D0-C5AC20D045EF</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>escaping</key>
+				<integer>4</integer>
+				<key>script</key>
+				<string>def sanitize_query
+	# strip protocols, (0) prefixes and invalid chars
+	valid_chars = /[[:digit:]+,;-]/
+	"{query}".sub(/$.+:\/\//, '').sub('(0)', '').scan(valid_chars).join
+end
+
+def is_alfred_search?
+	"{query}" =~ /^alfredsearch:/
+end
+
+print sanitize_query unless is_alfred_search?</string>
+				<key>type</key>
+				<integer>2</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>4788BA74-E0DB-4E57-BBB7-8F0FE1A26D30</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>dial</string>
+				<key>subtext</key>
+				<string>Dial {query} on iPhone.</string>
+				<key>text</key>
+				<string>Dial number</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>F6D41691-C9EC-45BB-A915-FCE5BD092E26</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>4</integer>
+				<key>keyword</key>
+				<string>call</string>
+				<key>runningsubtext</key>
+				<string>Searching main phone numbers for “{query}”…</string>
+				<key>script</key>
+				<string>./numbers '{query}'</string>
+				<key>subtext</key>
+				<string>Find main phone number for “{query}”</string>
+				<key>title</key>
+				<string>Call a contact’s main phone</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>47D96C10-AEEC-42E2-9477-4480A281E421</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>escaping</key>
+				<integer>4</integer>
+				<key>script</key>
+				<string># launch Alfred default search if passed a query starting with 'alfredsearch:'
+alfred_search='^alfredsearch:(.+)'
+
+[[ "{query}" =~ $alfred_search ]] &amp;&amp; osascript -e "tell Application \"Alfred 2\" to search \"${BASH_REMATCH[1]}\"" || afplay /System/Library/Sounds/Basso.aiff</string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.script</string>
+			<key>uid</key>
+			<string>ED8BE616-3542-447B-BB4E-AE61C9F13719</string>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>Inspired by the PushDialer workflow by Florian Pellet.
+
+The included “contacts” utility by Shane Celis (http://www.gnufoo.org/contacts/contacts.html) is licensed under the GPL version 2. By extension, this workflow is distributed under the terms of the General Public License version 2 – http://www.gnu.org/licenses/gpl-2.0.html.
+
+If you miss mobile numbers in feedback, make sure the phone label in the Contacts application is not set to “iPhone” – that label is not recognized by the contacts utility.</string>
+	<key>uidata</key>
+	<dict>
+		<key>0621FD11-8670-408A-9D33-9F90B30B9980</key>
+		<dict>
+			<key>ypos</key>
+			<real>330</real>
+		</dict>
+		<key>11DE4C89-1F64-4C74-B085-29C722E79422</key>
+		<dict>
+			<key>ypos</key>
+			<real>250</real>
+		</dict>
+		<key>4788BA74-E0DB-4E57-BBB7-8F0FE1A26D30</key>
+		<dict>
+			<key>ypos</key>
+			<real>220</real>
+		</dict>
+		<key>47D96C10-AEEC-42E2-9477-4480A281E421</key>
+		<dict>
+			<key>ypos</key>
+			<real>220</real>
+		</dict>
+		<key>4A1BDC7F-9D6E-40B0-83D0-C5AC20D045EF</key>
+		<dict>
+			<key>ypos</key>
+			<real>550</real>
+		</dict>
+		<key>56870C16-E0EB-4494-A4E3-3C3B75A00DB7</key>
+		<dict>
+			<key>ypos</key>
+			<real>110</real>
+		</dict>
+		<key>6DE8F299-FB56-4632-BC64-ADA04CBCDB42</key>
+		<dict>
+			<key>ypos</key>
+			<real>330</real>
+		</dict>
+		<key>710FA760-144A-4CAB-BCFB-58068098460D</key>
+		<dict>
+			<key>ypos</key>
+			<real>220</real>
+		</dict>
+		<key>7D86F3F2-651C-44AA-9BA6-2CF58CE12981</key>
+		<dict>
+			<key>ypos</key>
+			<real>140</real>
+		</dict>
+		<key>7DC2A0EE-C4E2-4A9C-B146-E67299FFE866</key>
+		<dict>
+			<key>ypos</key>
+			<real>440</real>
+		</dict>
+		<key>8C4148D5-F99B-460A-956C-827943864CFA</key>
+		<dict>
+			<key>ypos</key>
+			<real>10</real>
+		</dict>
+		<key>ED8BE616-3542-447B-BB4E-AE61C9F13719</key>
+		<dict>
+			<key>ypos</key>
+			<real>330</real>
+		</dict>
+		<key>F6D41691-C9EC-45BB-A915-FCE5BD092E26</key>
+		<dict>
+			<key>ypos</key>
+			<real>70</real>
+		</dict>
+	</dict>
+	<key>webaddress</key>
+	<string>http://martin.kopischke.net</string>
+</dict>
+</plist>
