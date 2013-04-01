@@ -1,5 +1,5 @@
 {
-	"version": 1.0.1,
+	"version": 1.01,
 	"download_uri": "https://github.com/kopischke/alfred-pushdial/raw/master/Dial%20with%20PushDialer.alfredworkflow",
 	"description": "Now processes “$” and “`” characters in queries correctly."
 }
