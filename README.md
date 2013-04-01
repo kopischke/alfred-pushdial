@@ -38,8 +38,8 @@ Dial with PushDialer supports [Alleyoop][alleyoop] for automated updates. [Insta
 
 ## Known bugs
 
-* If you miss mobile numbers in feedback, make sure the phone label in the Contacts application is not set to “iPhone” – that label is not recognized by the utility used to query the Contacts store.
-* Alfred version 2.0.2 seems not to pass query parameters containing non-ASCII characters correctly to script filters. The `call` filters will not match such queries until this is resolved. 
+* If you miss mobile numbers in feedback, make sure the phone label in the Contacts application is not set to “iPhone” – that label is not recognized by the utility used to query the Contacts store \[[Issue #1](../../issues/1)\].
+* Alfred version 2.0.2 seems not to pass query parameters containing non-ASCII characters correctly to script filters. The `call` filters will not match such queries until this is resolved \[[Issue #2](../../issues/2)\]. 
 
 ## Credits and License
 
