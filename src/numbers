@@ -8,12 +8,13 @@ icon="${4:-vCard.png}"
 ucase='[[:upper:]]'
 [[ ${query[0]:0:1} =~ $ucase ]] && shopt -u nocasematch || shopt -s nocasematch
 
-# PLIST head
-echo '<?xml version="1.0" encoding="UTF-8"?>'
-echo '<items>'
-
 blank='^[[:space:]]*$'
 if [[ ! "${query[0]}" =~ $blank ]]; then
+	# start XML output
+	source ./lib/feedback.sh
+	feedback --start
+	
+	# get Contacts data for query
 	names=(); numbers=(); uids=()
 	while read -r || [[ -n "$REPLY" ]]; do
 		# split names and numbers on UID (as a makeshift record separator)
@@ -37,7 +38,7 @@ if [[ ! "${query[0]}" =~ $blank ]]; then
 		fi
 	done < <(./contacts -SHs -f "%fn %ln %u %c %u $code" ${query[0]})
 	
-	# create PLIST items from matching contact items
+	# create XML items from matching contact items
 	# (check for error message as sends these to stdout)
 	if (( ${#names[@]} > 0 )) && [[ ${names[0]} != 'error: no one found' ]]; then
 		for (( i=0; i < ${#names[@]}; i++ )); do
@@ -46,24 +47,18 @@ if [[ ! "${query[0]}" =~ $blank ]]; then
 			uid="${uids[$i]}"
 			# deduplicate items
 			(( i > 0 )) && [[ $name == "${names[$(($i-1))]}" && $number == "${numbers[$(($i-1))]}" ]] && continue
-			# PLIST item entry
-			echo '<item uid="'"$uid"'" arg="'"$number"'" valid="yes">'
-			echo '<title><![CDATA['"$name"']]></title>'
-			echo '<subtitle><![CDATA[Dial '"$desc: $number"']]></subtitle>'
-			echo '<icon>'"$icon"'</icon>'
-			echo '</item>'
+			# XML output
+			text="Dial $desc: $number"
+			feedback "$name" --subtitle="$text" --uid="$uid" --action="$number" --valid --icon="$icon"
 		done
-	else
-		# Nothing found PLIST item
-		title='No matching contacts found'
-		subtitle="Action this item to run Alfred default searches for “${query[*]}”."
-		echo '<item uid="noresults" arg="alfredsearch:'"${query[*]}"'" valid="yes">'
-		echo '<title><![CDATA['"$title"']]></title>'
-		echo '<subtitle><![CDATA['"$subtitle"']]></subtitle>'
-		echo '<icon type="fileicon">/Applications/Contacts.app</icon>'
-		echo '</item>'
+	else # Create fallback XML item
+		title="No matching contacts found"
+		text="Action this item to run Alfred default searches for “${query[*]}”."
+		arg="alfredsearch:${query[*]}"
+		icon='/Applications/Contacts.app'
+		feedback "$title" --subtitle="$text" --uid='noresults' --action="$arg" --icon="$icon" --fileicon
 	fi
+	
+	# end XML output
+	feedback --end
 fi
-
-# PLIST tail
-echo '</items>'
