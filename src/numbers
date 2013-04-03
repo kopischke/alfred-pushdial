@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+scriptdir="${0%/*}"
+
 query=($1)
 desc="${2:-main phone number}"
 code="${3:-%p}"
@@ -11,7 +13,7 @@ ucase='[[:upper:]]'
 blank='^[[:space:]]*$'
 if [[ ! "${query[0]}" =~ $blank ]]; then
 	# start XML output
-	source ./lib/feedback.sh
+	source "$scriptdir"/lib/feedback.sh
 	feedback --start
 	
 	# get Contacts data for query
@@ -36,7 +38,7 @@ if [[ ! "${query[0]}" =~ $blank ]]; then
 			numbers+=("$number")
 			uids+=("$uid")
 		fi
-	done < <(./contacts -SHs -f "%fn %ln %u %c %u $code" ${query[0]})
+	done < <("$scriptdir"/contacts -SHs -f "%fn %ln %u %c %u $code" ${query[0]})
 	
 	# create XML items from matching contact items
 	# (check for error message as sends these to stdout)
