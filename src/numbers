@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 scriptdir="${0%/*}"
 
-query=($1)
+# normalize Unicode representation of characters with diacritics
+not_ascii='[^ -~]'
+[[ "$1" =~ $not_ascii ]] && query="$(echo "$1" | iconv -s -f 'UTF-8-Mac' -t 'UTF-8')" || query="$1"
+
+# assign arguments
+query=($query)
 desc="${2:-main phone number}"
 code="${3:-%p}"
 icon="${4:-vCard.png}"
