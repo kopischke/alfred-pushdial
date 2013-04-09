@@ -1,46 +1,46 @@
 #!/usr/bin/env bash
-scriptdir="${BASH_SOURCE[0]%/*}"
+readonly SCRIPT_DIR="${BASH_SOURCE[0]%/*}"
 
-source "$scriptdir"/lib/system.sh
-locale=$(get_locale --cached "$scriptdir"/cache/locale)
-export LC_ALL='en_US.UTF-8' # for UTF-8 case awareness
-
-# Parse arguments
-desc=''; icon=''
-case "$1" in
-	--found)
-		code=$':%n\t%u\t:%nn\t:%c\t%hp\t%wp\t%mp\t%Mp\t%op\t%pp'
-		desc='first found number' ;;
-	--home)
-		code=$':%n\t%u\t:%nn\t:%c\t%hp' ;;
-	--work)
-		code=$':%n\t%u\t:%nn\t:%c\t%wp' ;;
-	--mobile)
-		code=$':%n\t%u\t:%nn\t:%c\t%mp' ;;
-	--main)
-		code=$':%n\t%u\t:%nn\t:%c\t%Mp' ;;
-	--other)
-		code=$':%n\t%u\t:%nn\t:%c\t%op' ;;
-	--pager)
-		code=$':%n\t%u\t:%nn\t:%c\t%pp'
-		desc='pager number' ;;
-	--fax)
-		code=$':%n\t%u\t:%nn\t:%c\t%fp'
-		desc='fax number' ;;
-	*)
-		exit 1 ;;
-esac
-
-desc="${desc:-${1#--} phone number}"
-icon="${icon:-public.vcard}"
-
-source "$scriptdir"/lib/strings.sh
+# Ignore blank queries (both empty and whitespace)
+source "$SCRIPT_DIR"/lib/strings.sh || exit 1
 if ! is_blank $2; then
-	# Normalize Unicode representation of characters with diacritics
+	source "$SCRIPT_DIR"/lib/system.sh || exit 1
+	locale=$(get_locale --cached "$SCRIPT_DIR"/cache/locale)
+	export LC_ALL="${locale:-en_US}.UTF-8" # for UTF-8 case awareness
+	
+	# Parse arguments
+	desc=''; icon=''
+	case "$1" in
+		--found)
+			code=$':%n\t%u\t:%nn\t:%c\t%hp\t%wp\t%mp\t%Mp\t%op\t%pp'
+			desc='first found number' ;;
+		--home)
+			code=$':%n\t%u\t:%nn\t:%c\t%hp' ;;
+		--work)
+			code=$':%n\t%u\t:%nn\t:%c\t%wp' ;;
+		--mobile)
+			code=$':%n\t%u\t:%nn\t:%c\t%mp' ;;
+		--main)
+			code=$':%n\t%u\t:%nn\t:%c\t%Mp' ;;
+		--other)
+			code=$':%n\t%u\t:%nn\t:%c\t%op' ;;
+		--pager)
+			code=$':%n\t%u\t:%nn\t:%c\t%pp'
+			desc='pager number' ;;
+		--fax)
+			code=$':%n\t%u\t:%nn\t:%c\t%fp'
+			desc='fax number' ;;
+		*)
+			exit 1 ;;
+	esac
+	desc="${desc:-${1#--} phone number}"
+	icon="${icon:-public.vcard}"
+
+	# Normalize Unicode representation of non-ASCII characters
 	is_7bit "${*:2}" && query=(${*:2}) || query=($(utf8_normalize "${*:2}"))
 
 	# Start XML output
-	source "$scriptdir"/lib/feedback.sh
+	source "$SCRIPT_DIR"/lib/feedback.sh || exit 1
 	feedback --start
 
 	# Get contact data matching query
@@ -51,15 +51,16 @@ if ! is_blank $2; then
 
 		# Parse contact output line into record items
 		IFS=$'\t' record=($REPLY)
-		name="${record[0]#:}"
-		uid="${record[1]}"
-		nick="${record[2]#:}"
-		[[ ${record[3]#:} != "$name" ]] && company="${record[3]#:}" || company=''
 		number="${record[4]}"
-		title=''
 
 		# Only keep records with a phone number
 		if [[ -n "$number" ]]; then
+			name="${record[0]#:}"
+			uid="${record[1]}"
+			nick="${record[2]#:}"
+			[[ ${record[3]#:} != "$name" ]] && company="${record[3]#:}" || company=''
+			title=''
+
 			# Word incremental search; first match defines display format
 			for q in "${query[@]}"; do
 				# Query words starting with an upper case letter are case sensitive
@@ -85,7 +86,7 @@ if ! is_blank $2; then
 			# Store control var values
 			prev_title="$title"; prev_number="$number"; let matches++
 		fi
-	done < <(LC_COLLATE="${locale%.*}.UTF-8" "$scriptdir"/contacts -SH -f "$code" ${query[0]} | sort)
+	done < <("$SCRIPT_DIR"/contacts -SH -f "$code" ${query[0]} | sort)
 
 	# Create fallback item if no matching records are found
 	if (( $matches < 1 )); then
