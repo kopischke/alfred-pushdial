@@ -31,7 +31,7 @@ case "$1" in
 esac
 
 desc="${desc:-${1#--} phone number}"
-icon="${icon:-vCard.png}"
+icon="${icon:-public.vcard}"
 
 if ! is_blank $2; then
 	# Normalize Unicode representation of characters with diacritics
@@ -78,7 +78,7 @@ if ! is_blank $2; then
 
 			# Output XML feedback item
 			text="Call $desc: $number"
-			feedback "$title" --subtitle="$text" --uid="$uid" --action="$number" --valid --icon="$icon"
+			feedback "$title" --subtitle="$text" --uid="$uid" --action="$number" --valid --icon="$icon" --filetype
 
 			# Store control var values
 			prev_title="$title"; prev_number="$number"; let matches++
