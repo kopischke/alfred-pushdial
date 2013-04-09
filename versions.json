@@ -1,5 +1,5 @@
 {
-	"version": 1.11,
+	"version": 1.12,
 	"download_url": "https://github.com/kopischke/alfred-pushdial/raw/master/Dial%20with%20PushDialer.alfredworkflow",
-	"description": "Searchlight edition: much better call searches."
+	"description": "Fixed setting case sensitiveness in incremental searches."
 }
