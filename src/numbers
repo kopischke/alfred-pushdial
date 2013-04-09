@@ -1,73 +1,99 @@
 #!/usr/bin/env bash
-scriptdir="${0%/*}"
 export LC_CTYPE='en_US.UTF-8' # UTF-8 case awareness
 
-# normalize Unicode representation of characters with diacritics
-not_ascii='[^ -~]'
-[[ "$1" =~ $not_ascii ]] && query="$(echo "$1" | iconv -s -f 'UTF-8-Mac' -t 'UTF-8')" || query="$1"
 scriptdir="${BASH_SOURCE[0]%/*}"
+source "$scriptdir"/lib/strings.sh
 
-# assign arguments
-query=($query)
-desc="${2:-main phone number}"
-code="${3:-%p}"
-icon="${4:-vCard.png}"
+# Parse arguments
+desc=''; icon=''
+case "$1" in
+	--found)
+		code=$':%n\t%u\t:%nn\t:%c\t%hp\t%wp\t%mp\t%Mp\t%op\t%pp'
+		desc='first found number' ;;
+	--home)
+		code=$':%n\t%u\t:%nn\t:%c\t%hp' ;;
+	--work)
+		code=$':%n\t%u\t:%nn\t:%c\t%wp' ;;
+	--mobile)
+		code=$':%n\t%u\t:%nn\t:%c\t%mp' ;;
+	--main)
+		code=$':%n\t%u\t:%nn\t:%c\t%Mp' ;;
+	--other)
+		code=$':%n\t%u\t:%nn\t:%c\t%op' ;;
+	--pager)
+		code=$':%n\t%u\t:%nn\t:%c\t%pp'
+		desc='pager number' ;;
+	--fax)
+		code=$':%n\t%u\t:%nn\t:%c\t%fp'
+		desc='fax number' ;;
+	*)
+		exit 1 ;;
+esac
 
-# Searches beginning with a lower case letter are case insensitive
-ucase='[[:upper:]]'
-[[ ${query[0]:0:1} =~ $ucase ]] && shopt -u nocasematch || shopt -s nocasematch
+desc="${desc:-${1#--} phone number}"
+icon="${icon:-vCard.png}"
 
-blank='^[[:space:]]*$'
-if [[ ! "${query[0]}" =~ $blank ]]; then
-	# start XML output
+if ! is_blank $2; then
+	# Normalize Unicode representation of characters with diacritics
+	is_7bit "${*:2}" && query=(${*:2}) || query=($(utf8_normalize "${*:2}"))
+
+	# Start XML output
 	source "$scriptdir"/lib/feedback.sh
 	feedback --start
-	
-	# get Contacts data for query
-	names=(); numbers=(); uids=()
+
+	# Get contact data matching query
+	prev_title=''; prev_number=''; matches=0
 	while read -r || [[ -n "$REPLY" ]]; do
-		# split names and numbers on UID (as a makeshift record separator)
-		# filtering out non-matching names (as contacts itself only accepts a single,
-		# unquoted word as its query) and results without a phone number.
-		uid_regex='[A-Z0-9]{8}(-[A-Z0-9]{4}){3}-[A-Z0-9]{12}:ABPerson'
-		has_phone="(.*) ($uid_regex) (.*) $uid_regex (.+)"
-		has_query=".*${query[*]}.*"
-		if [[ $REPLY =~ $has_phone ]]; then
-			[[ ${BASH_REMATCH[1]} != ' ' ]] && name="${BASH_REMATCH[1]}" || unset name
-			uid="${BASH_REMATCH[2]}"
-			company="${BASH_REMATCH[4]}"
-			number="${BASH_REMATCH[6]}"
-			# if we match on name, add company name (if any), and vice versa
-			if   [[ $name =~ $has_query ]]; then names+=("$name${company:+ ($company)}")
-			elif [[ $company =~ $has_query ]]; then names+=("$company${name:+ – $name}")
-			else continue # skip when no full match is found
-			fi
-			numbers+=("$number")
-			uids+=("$uid")
+		# Catch contacts’ stdout message on 0 matches
+		[[ $REPLY == 'error: no one found' ]] && break
+
+		# Parse contact output line into record items
+		IFS=$'\t' record=($REPLY)
+		name="${record[0]#:}"
+		uid="${record[1]}"
+		nick="${record[2]#:}"
+		[[ ${record[3]#:} != "$name" ]] && company="${record[3]#:}" || company=''
+		number="${record[4]}"
+		title=''
+
+		# Only keep records with a phone number
+		if [[ -n "$number" ]]; then
+			# Word incremental search; first match defines display format
+			for q in "${query[@]}"; do
+				# Query words starting with an upper case letter are case sensitive
+				is_lower "$q" && shopt -s nocasematch || shopt -u nocasematch
+				if  [[ $name =~ "$q" ]]; then
+					[[ -z "$title" ]] && title="$name${company:+ ($company)}"
+				elif [[ $nick =~ "$q" ]]; then
+					[[ -z "$title" ]] && title="“${nick}”${name:+ $name}${company:+ ($company)}"
+				elif [[ $company =~ "$q" ]]; then
+					[[ -z "$title" ]] && title="$company${name:+ – $name}"
+				else # next record
+					continue 2
+				fi
+			done
+
+			# Skip duplicate records
+			[[ $title  == "$prev_title" && $number == "$prev_number" ]] && continue
+
+			# Output XML feedback item
+			text="Call $desc: $number"
+			feedback "$title" --subtitle="$text" --uid="$uid" --action="$number" --valid --icon="$icon"
+
+			# Store control var values
+			prev_title="$title"; prev_number="$number"; let matches++
 		fi
-	done < <("$scriptdir"/contacts -SHs -f "%fn %ln %u %c %u $code" ${query[0]})
-	
-	# create XML items from matching contact items
-	# (check for error message as sends these to stdout)
-	if (( ${#names[@]} > 0 )) && [[ ${names[0]} != 'error: no one found' ]]; then
-		for (( i=0; i < ${#names[@]}; i++ )); do
-			name="${names[$i]}"
-			number="${numbers[$i]}"
-			uid="${uids[$i]}"
-			# deduplicate items
-			(( i > 0 )) && [[ $name == "${names[$(($i-1))]}" && $number == "${numbers[$(($i-1))]}" ]] && continue
-			# XML output
-			text="Dial $desc: $number"
-			feedback "$name" --subtitle="$text" --uid="$uid" --action="$number" --valid --icon="$icon"
-		done
-	else # Create fallback XML item
-		title="No matching contacts found"
+	done < <("$scriptdir"/contacts -SH -f "$code" ${query[0]} | sort)
+
+	# Create fallback item if no matching records are found
+	if (( $matches < 1 )); then
+		title='No matching contacts found'
 		text="Action this item to run Alfred default searches for “${query[*]}”."
 		arg="alfredsearch:${query[*]}"
 		icon='/Applications/Contacts.app'
 		feedback "$title" --subtitle="$text" --uid='noresults' --action="$arg" --icon="$icon" --fileicon
 	fi
-	
-	# end XML output
+
+	# End XML output
 	feedback --end
 fi
