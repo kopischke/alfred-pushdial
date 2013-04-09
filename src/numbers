@@ -5,6 +5,7 @@ export LC_CTYPE='en_US.UTF-8' # UTF-8 case awareness
 # normalize Unicode representation of characters with diacritics
 not_ascii='[^ -~]'
 [[ "$1" =~ $not_ascii ]] && query="$(echo "$1" | iconv -s -f 'UTF-8-Mac' -t 'UTF-8')" || query="$1"
+scriptdir="${BASH_SOURCE[0]%/*}"
 
 # assign arguments
 query=($query)
