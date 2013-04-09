@@ -1,5 +1,5 @@
 {
-	"version": 1.02,
-	"download_uri": "https://github.com/kopischke/alfred-pushdial/raw/master/Dial%20with%20PushDialer.alfredworkflow",
-	"description": "Queries with non-ASCII characters now work in call commands."
+	"version": 1.1,
+	"download_url": "https://github.com/kopischke/alfred-pushdial/raw/master/Dial%20with%20PushDialer.alfredworkflow",
+	"description": "Searchlight edition: much better call searches."
 }

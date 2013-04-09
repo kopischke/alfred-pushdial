@@ -238,7 +238,7 @@ print "{query}" if is_alfred_search?</string>
 				<key>runningsubtext</key>
 				<string>Searching work phone numbers for “{query}”…</string>
 				<key>script</key>
-				<string>./numbers '{query}' 'work phone number' '%wp'</string>
+				<string>./numbers --work "{query}"</string>
 				<key>subtext</key>
 				<string>Find work phone number for “{query}”.</string>
 				<key>title</key>
@@ -265,7 +265,7 @@ print "{query}" if is_alfred_search?</string>
 				<key>runningsubtext</key>
 				<string>Searching home numbers for “{query}”…</string>
 				<key>script</key>
-				<string>./numbers '{query}' 'home phone number' '%hp'</string>
+				<string>./numbers --home "{query}"</string>
 				<key>subtext</key>
 				<string>Find main home number for “{query}”.</string>
 				<key>title</key>
@@ -340,7 +340,7 @@ print "{query}" if is_alfred_search?</string>
 				<key>runningsubtext</key>
 				<string>Searching mobile phone numbers for “{query}”…</string>
 				<key>script</key>
-				<string>./numbers '{query}' 'mobile phone number' '%mp'</string>
+				<string>./numbers --mobile "{query}"</string>
 				<key>subtext</key>
 				<string>Find mobile phone number for “{query}”.</string>
 				<key>title</key>
@@ -409,13 +409,13 @@ print sanitize_query unless is_alfred_search?</string>
 				<key>keyword</key>
 				<string>call</string>
 				<key>runningsubtext</key>
-				<string>Searching main phone numbers for “{query}”…</string>
+				<string>Searching all phone numbers for “{query}”…</string>
 				<key>script</key>
-				<string>./numbers '{query}'</string>
+				<string>./numbers --found "{query}"</string>
 				<key>subtext</key>
-				<string>Find main phone number for “{query}”</string>
+				<string>Find a phone number for “{query}”</string>
 				<key>title</key>
-				<string>Call a contact’s main phone</string>
+				<string>Call a contact’s first found phone</string>
 				<key>type</key>
 				<integer>0</integer>
 				<key>withspace</key>
