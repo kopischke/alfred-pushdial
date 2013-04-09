@@ -17,10 +17,14 @@ The workflow offers two different ways to dial addresses retrieved from OS X’ 
 2. it offers a `call` keyword that will return phone numbers for contacts matching the query, right in the Alfred result window:
 
     ![Alfred call keyword usage example](doc/pushdialer-call.png)
+
+    `call` returns the first found of the mobile, home, work or main phone numbers, or pager number, for contacts whose name, nickname or company name matches the query. If you want to specifically target home, work or mobile numbers, `call`’s brethren `callh`, `callw` and `callm` will do your bidding.
     
-    `call` returns the first found of the home, work and mobile phone numbers for contacts whose name or company name matches the query. If you want to specifically target home, work or mobile numbers, `call`’s brethren `callh`, `callw` and `callm` will do your bidding.
+    Note the search is incremental: every query word is matched to the result set individually, which allows you to refine the results using only partial queries:
     
-    Note the search is case sensitive if your query starts with an upper case letter, case agnostic if not (i.e. “Cool” finds “Liquid Coolants Ltd.”, but not “Mancoolie”, while “cool” finds both).
+    ![Alfred call keyword usage example](doc/pushdialer-call-incremental.png)
+    
+    Query word matching is case agnostic for words in all lower case, case sensitive otherwise (i.e. “Cool” finds “Liquid Coolants Ltd.”, but not “Mancoolie”, while “cool” finds both).
 
 ### Using it with text selected in OS X applications
 
@@ -38,7 +42,8 @@ Dial with PushDialer supports [Alleyoop][alleyoop] for automated updates. [Insta
 
 ## Known bugs
 
-1. If you miss mobile numbers in feedback, make sure the phone label in the Contacts application is not set to “iPhone” – that label is not recognized by the utility used to query the Contacts store \[[Issue #1](../../issues/1)\]. 
+1. If you miss mobile numbers in feedback, make sure the phone label in the Contacts application is not set to “iPhone” – that label is not recognized by the utility used to query the contacts store \[[Issue #1](../../issues/1)\].
+2. Others maybe, probably. Check the [Issues](../../issues) section. Create a new issue if you think you have found one that is not reported there.
 
 ## Credits and License
 
@@ -48,9 +53,9 @@ The `call` keyword family relies on the [*contacts* utility by Shane Celis][cont
 
 ## Contributing
 
-1. fork the repo
+1. fork the repo (bonus points for creating a feature branch)
 2. commit you changes
-3. make sure you haven’t broken anything (better: write some tests!)
+3. make sure you haven’t broken anything (even better: write some tests!)
 4. submit a pull request
 
 [alfred]:           http://www.alfredapp.com
