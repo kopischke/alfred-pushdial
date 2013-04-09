@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
-export LC_CTYPE='en_US.UTF-8' # UTF-8 case awareness
-
 scriptdir="${BASH_SOURCE[0]%/*}"
-source "$scriptdir"/lib/strings.sh
+
+source "$scriptdir"/lib/system.sh
+locale=$(get_locale --cached "$scriptdir"/cache/locale)
+export LC_ALL='en_US.UTF-8' # for UTF-8 case awareness
 
 # Parse arguments
 desc=''; icon=''
@@ -33,6 +34,7 @@ esac
 desc="${desc:-${1#--} phone number}"
 icon="${icon:-public.vcard}"
 
+source "$scriptdir"/lib/strings.sh
 if ! is_blank $2; then
 	# Normalize Unicode representation of characters with diacritics
 	is_7bit "${*:2}" && query=(${*:2}) || query=($(utf8_normalize "${*:2}"))
@@ -83,7 +85,7 @@ if ! is_blank $2; then
 			# Store control var values
 			prev_title="$title"; prev_number="$number"; let matches++
 		fi
-	done < <("$scriptdir"/contacts -SH -f "$code" ${query[0]} | sort)
+	done < <(LC_COLLATE="${locale%.*}.UTF-8" "$scriptdir"/contacts -SH -f "$code" ${query[0]} | sort)
 
 	# Create fallback item if no matching records are found
 	if (( $matches < 1 )); then
